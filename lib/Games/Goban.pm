@@ -1,11 +1,12 @@
+use strict;
+use warnings;
+
 package Games::Goban;
 
 use constant ORIGIN => ord("a");
 use 5.006;
-use strict;
-use warnings;
 use Carp;
-our $VERSION = sprintf "%d.%03d", q$Revision: 1.7 $ =~ /(\d+)/g;
+our $VERSION = '1.100';
 
 my $piececlass = 'Games::Goban::Piece';
 
@@ -323,11 +324,11 @@ sub hash {
     my $board = shift;
     my $hash = chr(0) x 91;
     my $bit = 0;
-    _iterboard {
+    $board->_iterboard(sub {
         my $piece = shift;
         vec($hash, $bit, 2) = $piece->color eq "b" ? 1 : 2 if $piece;
         $bit += 3;
-    } $board;
+    });
     return $hash;
 }
 
@@ -403,11 +404,11 @@ sub _calc_hoshi {
 # This subroutine passes every findable square on the board to the supplied
 # subroutine reference.
 
-sub _iterboard (&$) {
-    my ($sub, $board) = @_;
-    for my $x ('a'..chr($board->size + ord("a") - 1)) {
-        for my $y ('a'..chr($board->size + ord("a") - 1)) {
-            $sub->($board->get("$x$y"));
+sub _iterboard {
+    my ($self, $sub) = @_;
+    for my $x ('a'..chr($self->size + ord("a") - 1)) {
+        for my $y ('a'..chr($self->size + ord("a") - 1)) {
+            $sub->($self->get("$x$y"));
         }
     }
 

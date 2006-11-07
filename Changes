@@ -1,5 +1,8 @@
 Revision history for Perl extension Games::Goban.
 
+1.100 2006-11-06
+      kwalitee improvement
+
 0.03  2003-12-05 16:47:10
       rewrote hoshi calculation
       enabled arbitrary (integer, 4 < n < 27) board sizes
