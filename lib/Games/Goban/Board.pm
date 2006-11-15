@@ -43,8 +43,8 @@ sub new {
   my ($self, %opts) = @_;
 
   my $board = $self->SUPER::new(%opts);
-     $board->{skip_i} = defined $opts{skip_i} ? $opts{skip_i} : 0;
-	
+  $board->{skip_i} = defined $opts{skip_i} ? $opts{skip_i} : 0;
+
   $board;
 }
 
@@ -64,7 +64,7 @@ sub id2index {
   $id =~ tr/[j-t]/[i-s]/ if $self->{skip_i};
 
   my @loc = split //, $id;
-  
+
   $_ = ord($_) - $origin for @loc;
   \@loc;
 }
@@ -88,7 +88,7 @@ sub new {
   bless $self => $class;
 }
 
-sub notes { (shift)->{notes} }
+sub notes    { (shift)->{notes} }
 sub position { (shift)->current_space_id }
 
 sub moved_on { (shift)->{move} }
