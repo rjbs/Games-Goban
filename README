@@ -1,0 +1,6 @@
+README for Games-Goban
+
+This is a generic module for handling goban-based board games. Theoretically,
+it can be used to handle many of the other games which can use Smart Game
+Format (SGF) but I want to keep it reasonably restricted in order to keep it
+simple.
