@@ -9,7 +9,7 @@ Games::Goban - Board for playing go, renju, othello, etc.
 
 =head1 VERSION
 
-version 1.101
+version 1.100
 
   $Id$
 

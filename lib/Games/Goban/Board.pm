@@ -14,7 +14,7 @@ Games::Goban::Board -- a go board built from Games::Board
 
 =cut
 
-our $VERSION = '1.000';
+our $VERSION = '1.100';
 
 =head1 SYNOPSIS
 
