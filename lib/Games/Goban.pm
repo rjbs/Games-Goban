@@ -3,6 +3,18 @@ use warnings;
 
 package Games::Goban;
 
+=head1 NAME
+
+Games::Goban - Board for playing go, renju, othello, etc.
+
+=head1 VERSION
+
+version 1.101
+
+  $Id$
+
+=cut
+
 use constant ORIGIN => ord("a");
 use 5.006;
 use Carp;
@@ -25,10 +37,6 @@ our %defaults = (
   skip_i  => 0,
   referee => sub { 1 }
 );
-
-=head1 NAME
-
-Games::Goban - Board for playing go, renju, othello, etc.
 
 =head1 SYNOPSIS
 
@@ -233,7 +241,7 @@ sub as_sgf {
 	$sgf .= "(;GM[$types{$self->{game}}]FF[4]AP[Games::Goban]SZ[$self->{size}]PB[$self->{black}]PW[$self->{white}]\n";
 	foreach (@{$self->{moves}}) {
 		$sgf .= ";" . uc($_->{player}) .  "[".  ($_->{piece} ?
-		$self->_grid2pos(@{$_->{piece}->_xy},0) : '') . "]";
+		$self->_grid2pos(@{$_->{piece}->_xy},0) : q{}) . "]";
 	}
 	$sgf .= ")\n";
 	
@@ -265,7 +273,7 @@ sub as_text {
             if ($p and $p->move == $board->{move}-1 and $text and substr($text,-1,1) ne "\n") { chop $text; $text.="("; }
             $text .= ($p ? 
                 ($p->color eq "b" ? "X" : "O") : 
-                ($board->is_hoshi($pos) ? "+" : "."))." ";
+                ($board->is_hoshi($pos) ? q{+} : q{.})) . q{ };
             if ($p and $p->move == $board->{move}-1) { chop $text; $text.=")"; }
         }
         $text .= "\n";
