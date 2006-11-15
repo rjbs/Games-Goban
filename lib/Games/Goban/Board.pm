@@ -1,3 +1,5 @@
+use strict;
+use warnings;
 
 package Games::Goban::Board;
 use base qw(Games::Board::Grid);
@@ -5,6 +7,14 @@ use base qw(Games::Board::Grid);
 =head1 NAME
 
 Games::Goban::Board -- a go board built from Games::Board
+
+=head1 VERSION
+
+  $Id$
+
+=cut
+
+our $VERSION = '1.000';
 
 =head1 SYNOPSIS
 
@@ -22,9 +32,6 @@ currently implements its own board, badly.
 This module provides a class for representing a go board and pieces.
 
 =cut
-
-use strict;
-use warnings;
 
 =head1 METHODS
 
@@ -96,7 +103,7 @@ sub moved_on { (shift)->{move} }
 sub color  { my $self = shift; $self->{color} }
 sub colour { my $self = shift; $self->{color} }
 
-=head1 AUTHORS
+=head1 AUTHOR
 
 Ricardo SIGNES E<lt>rjbs@cpan.orgE<gt>
 

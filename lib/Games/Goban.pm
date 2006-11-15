@@ -15,11 +15,11 @@ version 1.101
 
 =cut
 
-use constant ORIGIN => ord("a");
 use 5.006;
 use Carp;
 our $VERSION = '1.100';
 
+my $ORIGIN     = ord('a');
 my $piececlass = 'Games::Goban::Piece';
 
 our %types = (
@@ -228,7 +228,7 @@ Returns true if the named position is a hoshi (star) point.
 sub is_hoshi {
   my $board = shift;
   my $point = shift;
-  return 1 if grep(/^$point$/, $board->hoshi);
+  return 1 if grep { /^$point$/ } $board->hoshi;
 }
 
 =head2 as_sgf
@@ -246,9 +246,9 @@ sub as_sgf {
   $sgf
     .= "(;GM[$types{$self->{game}}]FF[4]AP[Games::Goban]SZ[$self->{size}]PB[$self->{black}]PW[$self->{white}]\n";
   foreach (@{ $self->{moves} }) {
-    $sgf .= ";"
-      . uc($_->{player}) . "["
-      . ($_->{piece} ? $self->_grid2pos(@{ $_->{piece}->_xy }, 0) : q{}) . "]";
+    $sgf .= q{;}
+      . uc($_->{player}) . q<[>
+      . ($_->{piece} ? $self->_grid2pos(@{ $_->{piece}->_xy }, 0) : q{}) . q<]>;
   }
   $sgf .= ")\n";
 
@@ -272,7 +272,7 @@ sub as_text {
   my %opts  = @_;
   my @hoshi = $board->hoshi;
   my $text;
-  for (my $y = $board->size - 1; $y >= 0; $y--) {
+  for (my $y = $board->size - 1; $y >= 0; $y--) { ## no critic For
     $text .= substr($board->_grid2pos(0, $y, $board->skip_i), 1, 1) . ': '
       if $opts{coords};
     for my $x (0 .. ($board->size - 1)) {
@@ -296,9 +296,9 @@ sub as_text {
     $text .= "\n";
   }
   if ($opts{coords}) {
-    $text .= '   ';
+    $text .= q{ } x 3;
     for (0 .. ($board->size - 1)) {
-      $text .= substr($board->_grid2pos($_, 0, $board->skip_i), 0, 1) . ' ';
+      $text .= substr($board->_grid2pos($_, 0, $board->skip_i), 0, 1) . q{ };
     }
     $text .= "\n";
   }
@@ -459,7 +459,7 @@ sub _grid2pos {
     }
   }
 
-  return chr(ORIGIN + $x) . chr(ORIGIN + $y);
+  return chr($ORIGIN + $x) . chr($ORIGIN + $y);
 }
 
 # This method accepts an 'xy' position string and returns the (x,y) indexes
@@ -473,10 +473,10 @@ sub _pos2grid {
   my ($xc, $yc) = (lc($pos) =~ /^([a-z])([a-z])$/);
   my ($x, $y);
 
-  $x = ord($xc) - ORIGIN;
+  $x = ord($xc) - $ORIGIN;
   $x-- if ($skip_i and ($x > 8));
 
-  $y = ord($yc) - ORIGIN;
+  $y = ord($yc) - $ORIGIN;
   $y-- if ($skip_i and ($y > 8));
 
   return ($x, $y);
@@ -524,6 +524,7 @@ one in that position.
 sub position {
   my $piece = shift;
 
+  ## no critic Private
   $piece->board->_grid2pos(@{ $piece->_xy }, $piece->board->skip_i);
 }
 
