@@ -1,19 +1,7 @@
 use strict;
 use warnings;
-
 package Games::Goban;
-
-=head1 NAME
-
-Games::Goban - Board for playing go, renju, othello, etc.
-
-=head1 VERSION
-
-version 1.100
-
-  $Id$
-
-=cut
+# ABSTRACT: Board for playing go, renju, othello, etc.
 
 use 5.006;
 use Carp;
@@ -42,11 +30,11 @@ our %defaults = (
 
   use Games::Goban;
   my $board = new Games::Goban ( 
-	size  => 19,
-	game  => "go",
-	white => "Seigen, Go",
-	black => "Minoru, Kitani",
-	referee => \&Games::Goban::Rules::Go,
+    size  => 19,
+    game  => "go",
+    white => "Seigen, Go",
+    black => "Minoru, Kitani",
+    referee => \&Games::Goban::Rules::Go,
   );
 
   $board->move("pd"); $board->move("dd");
@@ -205,7 +193,7 @@ sub size { $_[0]->{size} }
 
 =head2 hoshi
 
-	@hoshi_points = $board->hoshi
+  @hoshi_points = $board->hoshi
 
 Returns a list of hoshi points.
 
@@ -219,7 +207,7 @@ sub hoshi {
 
 =head2 is_hoshi
 
-	$star = $board->is_hoshi('dp')
+  $star = $board->is_hoshi('dp')
 
 Returns true if the named position is a hoshi (star) point.
 
@@ -581,9 +569,4 @@ Smart Game Format: http://www.red-bean.com/sgf/
 C<Games::Go::SGF>
 
 The US Go Association: http://www.usgo.org/
-
-=head1 AUTHOR
-
-Simon Cozens, C<simon@cpan.org>
-Ricardo Signes, C<rjbs@cpan.org>
 

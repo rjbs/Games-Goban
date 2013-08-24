@@ -2,19 +2,8 @@ use strict;
 use warnings;
 
 package Games::Goban::Board;
-use base qw(Games::Board::Grid);
-
-=head1 NAME
-
-Games::Goban::Board -- a go board built from Games::Board
-
-=head1 VERSION
-
-  $Id$
-
-=cut
-
-our $VERSION = '1.100';
+use parent qw(Games::Board::Grid);
+# ABSTRACT: a go board built from Games::Board
 
 =head1 SYNOPSIS
 
@@ -102,20 +91,5 @@ sub moved_on { (shift)->{move} }
 
 sub color  { my $self = shift; $self->{color} }
 sub colour { my $self = shift; $self->{color} }
-
-=head1 AUTHOR
-
-Ricardo SIGNES E<lt>rjbs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-Copyright 2004 by Ricardo Signes E<lt>rjbs@cpan.orgE<gt>
-
-This program is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
-
-See http://www.perl.com/perl/misc/Artistic.html
-
-=cut
 
 1;
