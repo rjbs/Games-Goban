@@ -1,6 +1,7 @@
 Revision history for Perl extension Games::Goban.
 
 {{$NEXT}}
+          replace busted test file
 
 1.101     2013-08-24 08:52:59 America/New_York
           update bugtracker and repo

@@ -5,7 +5,6 @@ package Games::Goban;
 
 use 5.006;
 use Carp;
-our $VERSION = '1.100';
 
 my $ORIGIN     = ord('a');
 my $piececlass = 'Games::Goban::Piece';
